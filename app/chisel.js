@@ -10,7 +10,7 @@ class Chisel {
     this.tf = new TextFormatter(this.hc.convertHeader());
   }
 
-  convertMarkdown(){
+  convertMarkdown() {
     return this.tf.formatText();
   };
 

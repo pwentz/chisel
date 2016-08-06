@@ -1,12 +1,12 @@
 class HeaderConverter {
-  constructor(markdown){
+  constructor(markdown) {
     this.markdown = markdown
   }
 
-  convertHeader(){
+  convertHeader() {
     const splitMarkdown = this.markdown.split(' ');
 
-    if (splitMarkdown[0][0] !== '#'){
+    if (splitMarkdown[0][0] !== '#') {
       return `<p>${this.markdown}</p>`
     }
     else {
