@@ -1,22 +1,19 @@
 // chisel.js
 //
+'use strict'
+const HeaderConverter = require('./headerConverter');
+const TextFormatter = require('./textFormatter');
+
 class Chisel {
   constructor(markdown){
-    this.markdown = markdown;
+    this.hc = new HeaderConverter(markdown);
+    this.tf = new TextFormatter(this.hc.convertHeader());
   }
 
-  convertMarkdown(){
-    const splitMarkdown = this.markdown.split(' ');
-
-    if (splitMarkdown[0][0] !== '#'){
-      return `<p>${this.markdown}</p>`
-    }
-    else {
-      let headerSize = splitMarkdown.splice(0, 1).toString().length;
-      let message = splitMarkdown.join(' ');
-      return `<h${headerSize}>${message}</h${headerSize}>`
-    }
+  convertMarkdown() {
+    return this.tf.formatText();
   };
+
 }
 
 module.exports = Chisel
