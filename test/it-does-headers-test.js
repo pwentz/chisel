@@ -41,12 +41,4 @@ describe('it does headers', function(){
       expect(chisel.convertMarkdown()).to.equal("<h6>Hello, World!</h6>");
     });
   });
-
-  describe('returns p elements for everything else', function(){
-    it ('returns all text not preceded by # wrapped in p tags', function(){
-      let chisel = new Chisel('Hello, World!')
-
-      expect(chisel.convertMarkdown()).to.equal('<p>Hello, World!</p>');
-    });
-  });
 });
