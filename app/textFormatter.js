@@ -5,12 +5,14 @@ class TextFormatter {
   constructor(parsedMarkdown) {
     this.markdown = parsedMarkdown;
     this.sf = new StrongFormatter(this.markdown);
-    this.ef = new EmFormatter(this.sf.findAndReplace());
+    this.ef = new EmFormatter;
   }
 
   formatText() {
-    return this.ef.findAndReplace();
+    this.ef.markdown = this.sf.formatStrong();
+    return this.ef.formatEm();
   }
+
 }
 
 module.exports = TextFormatter;

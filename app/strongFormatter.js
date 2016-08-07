@@ -1,25 +1,11 @@
 class StrongFormatter {
-  constructor(message) {
-    this.message = message;
-    this.strongStart = message.indexOf('**');
-    this.strongFinish = message.lastIndexOf('**');
+  constructor(markdown) {
+    this.markdown = markdown;
   };
 
-  findAndReplace() {
-    if (this.strongStart === -1 || this.strongFinish === -1){
-      return this.message;
-    }
-    else {
-      return this.strongReplace();
-    }
-  };
-
-  strongReplace() {
-    return this.message.replace(
-      this.message.substring(this.strongStart, this.strongFinish + 2),
-      `<strong>${this.message.substring(this.strongStart + 2, this.strongFinish)}</strong>`
-    );
-  };
+  formatStrong() {
+    let html = this.markdown.replace(' **', ' <strong>').replace('** ', '</strong> ');
+    return html;
+  }
 }
-
 module.exports = StrongFormatter;
