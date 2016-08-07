@@ -1,7 +1,7 @@
 // chisel.js
 //
 'use strict'
-const HeaderConverter = require('./headerConverter');
+const LineFormatter = require('./lineFormatter');
 const TextFormatter = require('./textFormatter');
 const MasterListFormatter = require('./masterListFormatter')
 
@@ -10,12 +10,12 @@ class Chisel {
     this.body = this.extractBody(markdown);
     this.head = this.extractHead(markdown);
     this.tf = new TextFormatter(this.body);
-    this.hc = new HeaderConverter(this.convergeMessage());
+    this.lf = new LineFormatter(this.convergeMessage());
     this.mlf = new MasterListFormatter(this.tf.formatText());
   }
 
   convertMarkdown() {
-    return this.hc.convertHeader();
+    return this.lf.applyTags();
   };
 
   extractBody(markdown) {
