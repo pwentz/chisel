@@ -1,13 +1,22 @@
 const UnorderedListFormatter = require('./unorderedListFormatter');
 
 class MasterListFormatter {
-  constructor(semiParsedMarkdown) {
-    this.message = semiParsedMarkdown;
-    this.ulf = new UnorderedListFormatter(this.message);
+  constructor(markdown) {
+    this.markdown = markdown;
+    this.ulf = new UnorderedListFormatter(this.markdown);
+  }
+
+  masterListValidation() {
+    if (this.ulf.unorderedListValidation()) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   constructList() {
-    return this.ulf.formatList();
+    return this.ulf.constructUnorderedList();
   }
 }
-module.exports = MasterListFormatter;
+module.exports = MasterListFormatter

@@ -4,8 +4,8 @@ class EmFormatter {
   }
 
   formatEm() {
-    let html = this.markdown.replace(' *', ' <em>').replace('* ', '</em> ');
-    return html.trim();
+    let html = this.markdown.replace('*', '<em>').replace('*', '</em>');
+    return html;
   }
 }
 module.exports = EmFormatter;

@@ -7,23 +7,36 @@ const MasterListFormatter = require('./masterListFormatter')
 
 class Chisel {
   constructor(markdown) {
+    this.markdown = markdown;
     this.body = this.extractBody(markdown);
     this.head = this.extractHead(markdown);
-    this.tf = new TextFormatter(this.body);
+    this.mlf = new MasterListFormatter(this.body);
+    this.tf = new TextFormatter();
+    /*
     this.lf = new LineFormatter(this.convergeMessage());
-    this.mlf = new MasterListFormatter(this.tf.formatText());
+    */
   }
 
   convertMarkdown() {
-    return this.lf.applyTags();
+    if (this.mlf.masterListValidation()) {
+      this.tf.markdown = this.mlf.constructList();
+    }
+    else {
+      this.tf.markdown = this.markdown;
+    }
+    return this.tf.formatText();
   };
+
+  listFormatting() {
+    return this.mlf.constructList();
+  }
 
   extractBody(markdown) {
     let message = markdown.split(' ')
     if (markdown[0] === '#') {
       message.splice(0, 1);
       let body = message.join(' ');
-      return body.concat(' ');
+      return body;
     }
     else {
       return message.join(' ').concat(' ');
