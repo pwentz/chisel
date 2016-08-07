@@ -20,6 +20,13 @@ describe('it does text formatting', function(){
   });
 
   describe("it returns <em> tags in place of text wrapped in '*'", function(){
+    it('can convert text in lists', function(){
+      let chisel = new Chisel('\n* Sushi\n* *Barbeque*\n* Mexican');
+      let expectedResult = '<ul>\n<li>Sushi</li>\n<li><em>Barbeque</em></li>\n<li>Mexican</li>\n</ul>\n';
+
+      expect(chisel.convertMarkdown()).to.equal(expectedResult);
+    });
+
     it('can convert text in header', function(){
       let chisel = new Chisel('## I love *fish* tacos.');
       let expectedResult = '<h2>I love <em>fish</em> tacos.</h2>';

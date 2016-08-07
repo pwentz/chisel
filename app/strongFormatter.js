@@ -4,7 +4,7 @@ class StrongFormatter {
   };
 
   formatStrong() {
-    let html = this.markdown.replace(' **', ' <strong>').replace('** ', '</strong> ');
+    let html = this.markdown.replace('**', '<strong>').replace('**', '</strong>');
     return html;
   }
 }

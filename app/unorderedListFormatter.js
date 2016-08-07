@@ -1,18 +1,32 @@
 class UnorderedListFormatter {
-  constructor(semiParsedMarkdown) {
-    this.message = semiParsedMarkdown;
+  constructor(markdown) {
+    this.markdown = markdown;
+    this.listItem = this.markdown.indexOf('\n* ');
   }
 
-  formatList() {
-    let contents = this.listItems()
+  unorderedListValidation() {
+    if (this.listItem === -1) {
+      return false;
+    }
+    else {
+      return true
+    }
   }
 
-  listItems() {
-    return this.message.split('*').join('</li>\n<li>');
+  constructUnorderedList() {
+    if (this.unorderedListValidation()) {
+      let extractedList = this.markdown.slice(this.listItem);
+      return this.formatUnorderedList(extractedList);
+    }
   }
 
-  applyListTags() {
-    return this.listItems().replace('</li>', '<ul>\n').concat('</li>\n</ul>')
+  formatUnorderedList(message) {
+    let listItems = message.split('\n* ').slice(1);
+    let list = ''
+    for (var l of listItems) {
+      list += `<li>${l.trim()}</li>\n`
+    }
+    return `<ul>\n${list}</ul>\n`
   }
 }
 module.exports = UnorderedListFormatter;
