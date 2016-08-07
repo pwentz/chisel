@@ -1,25 +1,11 @@
 class EmFormatter {
-  constructor(message){
-    this.message = message;
-    this.emStart = message.indexOf('*');
-    this.emFinish = message.lastIndexOf('*');
+  constructor(markdown){
+    this.markdown = markdown;
   }
 
-  findAndReplace() {
-    if (this.emStart === -1 || this.emFinish === -1) {
-      return this.message;
-    }
-    else {
-      return this.emReplace();
-    }
-  }
-
-  emReplace() {
-    return this.message.replace(
-      this.message.substring(this.emStart, this.emFinish + 1),
-      `<em>${this.message.substring(this.emStart + 1, this.emFinish)}</em>`
-    );
+  formatEm() {
+    let html = this.markdown.replace(' *', ' <em>').replace('* ', '</em> ');
+    return html.trim();
   }
 }
-
 module.exports = EmFormatter;
