@@ -9,7 +9,7 @@ class UnorderedListFormatter {
       return false;
     }
     else {
-      return true
+      return true;
     }
   }
 
@@ -22,11 +22,11 @@ class UnorderedListFormatter {
 
   formatUnorderedList(message) {
     let listItems = message.split('\n* ').slice(1);
-    let list = ''
+    let list = '';
     for (var l of listItems) {
-      list += `<li>${l.trim()}</li>\n`
+      list += `<li>${l.trim()}</li>\n`;
     }
-    return `<ul>\n${list}</ul>\n`
+    return `<ul>\n${list}</ul>\n`;
   }
 }
 module.exports = UnorderedListFormatter;

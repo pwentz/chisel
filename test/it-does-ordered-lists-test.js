@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const MasterListFormatter = require('../app/masterListFormatter');
 const Chisel = require('../app/chisel');
 
-describe('it does unordered lists', function() {
+describe('it does ordered lists', function() {
   describe('it can handle converting numbered items to ordered lists', function() {
     it('knows how to convert ordered lists', function() {
       let mlf = new MasterListFormatter('\n1. Sushi\n2. Barbeque\n3. Mexican');
@@ -26,4 +26,5 @@ describe('it does unordered lists', function() {
       expect(chisel.convertMarkdown()).to.equal(expectedResult);
     });
   });
+});
 
