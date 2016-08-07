@@ -3,7 +3,8 @@
 'use strict'
 const LineFormatter = require('./lineFormatter');
 const TextFormatter = require('./textFormatter');
-const MasterListFormatter = require('./masterListFormatter')
+const MasterListFormatter = require('./masterListFormatter');
+const fs = require('fs');
 
 class Chisel {
   constructor(markdown) {
@@ -15,6 +16,10 @@ class Chisel {
     /*
     this.lf = new LineFormatter(this.convergeMessage());
     */
+  }
+
+  readFile() {
+    return fs.readFileSync(process.argv[2], 'utf8')
   }
 
   convertMarkdown() {
@@ -62,3 +67,5 @@ class Chisel {
 }
 
 module.exports = Chisel
+let chisel = new Chisel('ds')
+chisel.markdown = chisel.readFile();
