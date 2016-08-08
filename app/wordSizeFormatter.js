@@ -8,42 +8,40 @@ class WordSizeFormatter {
     this.hf = new HeaderFormatter;
   }
 
-  wordSizingValidation(line) {
-    if (line[0] === "<") {
-      return false
-    }
-    else {
-      return true;
-    }
-  }
-
   formatSizing() {
     let newMarkdown = [];
     for (var i = 0; i < this.markdown.length; i++) {
-      if (this.wordSizingValidation(i)) {
-        let line = this.markdown[i]
+      let line = this.markdown[i]
+      if (line[0] === "#") {
+        newMarkdown.push(this.applyHeader(line));
+      }
+      else if (this.implementedCode(line) === false) {
         let beforeLine = this.markdown[i - 1]
         let afterLine = this.markdown[i + 1]
-        newMarkdown.push(this.tagFilter(line, beforeLine, afterLine));
+        newMarkdown.push(this.applyParagraph(line, beforeLine, afterLine));
       }
       else {
-        newMarkdown.push(i);
+        newMarkdown.push(line);
       }
     }
     return newMarkdown;
   }
 
-  tagFilter(line, beforeLine, afterLine) {
-    if (line[0] === "#") {
-      this.hf.markdown = line;
-      return this.hf.applyHTags();
-    }
-    else {
-      this.pf.markdown = line;
-      this.pf.afterLine = afterLine;
-      this.pf.beforeLine = beforeLine;
-      return this.pf.applyPTags();
-    }
+  implementedCode(line) {
+    let tags = line.slice(0, 4);
+    return tags === '<ul>' || tags === '<ol>'
+  }
+
+  applyHeader(line) {
+    this.hf.markdown = line;
+    return this.hf.applyHTags();
+  }
+
+  applyParagraph(line, beforeLine, afterLine) {
+    this.pf.markdown = line;
+    this.pf.afterLine = afterLine;
+    this.pf.beforeLine = beforeLine;
+    return this.pf.formatPTags();
   }
 
 }
