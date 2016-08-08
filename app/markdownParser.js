@@ -11,14 +11,16 @@ class MarkdownParser {
   }
 
   markdownFormat(markdown) {
-    return markdown.split('\n')
+    let newMarkdown = markdown.split('\n')
+    newMarkdown.pop();
+    return newMarkdown;
   }
 
   parseMarkdown() {
     this.wmf.markdown = this.mlf.checkAndConstructList();
     this.wsf.markdown = this.wmf.formatWords();
-    let finalHTML = this.wsf.formatSizing().join(' ');
-    console.log(finalHTML);
+    let finalHTML = this.wsf.formatSizing().join('');
+    return finalHTML;
   }
 
   filterFormatting(markdownLine) {

@@ -5,7 +5,7 @@ class ParagraphFormatter {
     this.beforeLine;
   }
 
-  applyPTags() {
+  formatPTags() {
     if (this.precedingDoubleNewLine()) {
       return this.assignFrontTags();
     }
@@ -29,7 +29,7 @@ class ParagraphFormatter {
 
   assignFrontTags() {
     if ((this.markdown + this.afterLine) === this.markdown) {
-      return `<p>${this.markdown}</p>`
+      return `<p>${this.markdown}</p>\n`
     }
     else {
       return `<p>${this.markdown}`
@@ -37,7 +37,7 @@ class ParagraphFormatter {
   }
 
   assignBackTags() {
-    return `${this.markdown}</p>`
+    return `${this.markdown}</p>\n`
   }
 }
 module.exports = ParagraphFormatter;
