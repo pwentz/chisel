@@ -1,23 +1,43 @@
 class ParagraphFormatter {
-  constructor(message) {
-    this.message = message
+  constructor(markdown) {
+    this.markdown = markdown;
+    this.afterLine;
+    this.beforeLine;
   }
 
   applyPTags() {
-    let lineBreak = this.message.indexOf('\n\n');
-    if (lineBreak === -1) {
-      let newMessage = this.message.replace('\n', ' ');
-      return `<p>${newMessage}</p>`;
+    if (this.precedingDoubleNewLine()) {
+      return this.assignFrontTags();
+    }
+    else if (this.incomingDoubleNewLine()) {
+      return this.assignBackTags();
     }
     else {
-      let message = this.message.split('\n').join(' ').split('  ');
-      let newMessage = '';
-      for (var i of message) {
-        newMessage += `<p>${i}</p>\n`;
-      }
-      newMessage = newMessage.slice(0, -1);
-      return newMessage;
+      return this.markdown;
     }
+  }
+
+  precedingDoubleNewLine() {
+    let openingTagDecision = this.beforeLine + this.markdown === this.markdown;
+    return openingTagDecision;
+  }
+
+  incomingDoubleNewLine() {
+    let closingTagDecision = this.markdown + this.afterLine === this.markdown;
+    return closingTagDecision;
+  }
+
+  assignFrontTags() {
+    if ((this.markdown + this.afterLine) === this.markdown) {
+      return `<p>${this.markdown}</p>`
+    }
+    else {
+      return `<p>${this.markdown}`
+    }
+  }
+
+  assignBackTags() {
+    return `${this.markdown}</p>`
   }
 }
 module.exports = ParagraphFormatter;

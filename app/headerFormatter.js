@@ -1,13 +1,13 @@
 class HeaderFormatter {
-  constructor(message){
-    this.message = message
+  constructor(markdown){
+    this.markdown = markdown;
   }
 
   applyHTags(){
-    const splitMarkdown = this.message.split(' ');
+    const splitMarkdown = this.markdown.split(' ');
     let headerSize = splitMarkdown.splice(0, 1).toString().length;
-    let message = splitMarkdown.join(' ');
-    return `<h${headerSize}>${message}</h${headerSize}>`
+    let markdown = splitMarkdown.join(' ');
+    return `<h${headerSize}>${markdown}</h${headerSize}>\n`
   }
 }
 module.exports = HeaderFormatter;
