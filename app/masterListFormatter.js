@@ -75,7 +75,7 @@ class MasterListFormatter {
         listItems.push(this.markdown.indexOf(j));
       }
     }
-    return list;
+    return listItems;
   }
 }
 module.exports = MasterListFormatter
