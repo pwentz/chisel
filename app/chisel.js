@@ -16,7 +16,8 @@ class Chisel {
 
   writeFile() {
     let fileName = process.argv[3]
-    return fs.writeFileSync(fileName, this.mp.parseMarkdown(), 'utf8');
+    fs.writeFileSync(fileName, this.mp.parseMarkdown(), 'utf8');
+    console.log('Your new html file has been created!')
   }
 
 }
