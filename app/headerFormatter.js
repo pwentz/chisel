@@ -7,7 +7,7 @@ class HeaderFormatter {
     const splitMarkdown = this.markdown.split(' ');
     let headerSize = splitMarkdown.splice(0, 1).toString().length;
     let markdown = splitMarkdown.join(' ');
-    return `<h${headerSize}>${markdown}</h${headerSize}>\n`
+    return `<h${headerSize}>${markdown}</h${headerSize}>\n\n`
   }
 }
 module.exports = HeaderFormatter;
