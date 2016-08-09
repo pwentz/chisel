@@ -25,11 +25,22 @@ class MasterListFormatter {
       return this.html.join('\n');
     }
     else if (this.unordered.length === 0) {
-      return this.constructOrdered();
+      return this.integrateLists(this.constructOrdered());
     }
     else if (this.ordered.length === 0){
-      return this.constructUnordered();
+      return this.integrateLists(this.constructUnordered());
     }
+  }
+
+  integrateLists(listItems) {
+    let newDoc = this.html
+    let lists = listItems.split('1.').filter(Boolean);
+    this.listLocations.forEach((location) => {
+      let list = '1.' + lists.shift()
+      let listLength = list.split('\n').length + 1;
+      newDoc.splice(location, listLength, list)
+    })
+    return newDoc;
   }
 
   openingTag(line) {

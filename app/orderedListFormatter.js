@@ -8,7 +8,7 @@ class OrderedListFormatter {
     for (var g of this.markdown) {
       list += `<li>${this.formatListItem(g)}</li>\n`;
     }
-    return `<ol>\n${list}</ol>\n`;
+    return `<ol>\n${list}</ol>\n\n`;
   }
 
   formatListItem(listItem) {

@@ -4,7 +4,7 @@ class LineModifierFormatter {
   }
 
   formatLines() {
-    let formattedLines = this.splitLine.reduce(this.applyLineFormatting, '').trim();
+    let formattedLines = this.splitLine.reduce(this.applyLineFormatting, '');
     return formattedLines;
   }
 
