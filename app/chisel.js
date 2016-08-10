@@ -25,4 +25,4 @@ class Chisel {
 module.exports = Chisel
 let chisel = new Chisel('ds');
 console.log(chisel.mp.parseMarkdown());
-chisel.writeFile();
+// chisel.writeFile();

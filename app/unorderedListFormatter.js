@@ -1,6 +1,7 @@
 class UnorderedListFormatter {
   constructor(markdown) {
-    this.markdown = markdown;
+    this.listLocations = []
+    this.markdown = markdown
   }
 
   formatUnorderedList() {
@@ -9,6 +10,10 @@ class UnorderedListFormatter {
       list += `<li>${l.trim()}</li>\n`;
     }
     return `<ul>\n${list}</ul>\n`;
+  }
+
+  listValidation(line) {
+    return (line[0] + line[1] === '* ')
   }
 }
 module.exports = UnorderedListFormatter;

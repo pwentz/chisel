@@ -61,9 +61,9 @@ class MasterListFormatter {
     return result;
   }
 
-  constructUnordered() {
+  construct(lists) {
     let markdown = ''
-    this.unordered.forEach((item, index) => {
+    lists.forEach((item, index) => {
       if (item.slice(0, 4) === '<li>') {
         markdown += `* ${this.removeTags(item)}\n`;
       }
