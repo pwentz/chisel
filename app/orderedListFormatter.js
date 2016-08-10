@@ -4,13 +4,13 @@ class OrderedListFormatter {
     this.markdown = markdown
   }
 
-  formatOrderedList() {
+  formatList() {
     let newDoc = this.markdown
     let listItems = this.markdown.filter(this.listValidation);
     listItems.forEach((item, index) => {
       let listIndex = newDoc.indexOf(item);
       if (listItems[index + 1] === '1' || item === listItems.slice(-1).toString()) {
-        newDoc.splice(listIndex, 1, `<li>${item.slice(3)}</li>\n</ol>\n`)
+        newDoc.splice(listIndex, 1, `<li>${item.slice(3)}</li>\n</ol>\n\n`)
       }
       else if (item[0] === '1') {
         newDoc.splice(listIndex, 1, `<ol>\n<li>${item.slice(3)}</li>\n`)

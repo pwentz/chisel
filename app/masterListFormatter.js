@@ -10,7 +10,8 @@ class MasterListFormatter {
   }
 
   checkAndConstructList(item, index) {
-    return this.olf.formatOrderedList();
+    this.ulf.markdown = this.olf.formatList();
+    return this.ulf.formatList();
   }
 }
 module.exports = MasterListFormatter
