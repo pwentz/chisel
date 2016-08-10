@@ -1,43 +1,21 @@
+const ParagraphHelper = require('./paragraphHelper');
+
 class ParagraphFormatter {
-  constructor(markdown) {
-    this.markdown = markdown;
-    this.afterLine;
-    this.beforeLine;
+  constructor() {
+    this.markdown
   }
 
-  formatPTags() {
-    if (this.precedingDoubleNewLine()) {
-      return this.assignFrontTags();
-    }
-    else if (this.incomingDoubleNewLine()) {
-      return this.assignBackTags();
-    }
-    else {
-      return this.markdown;
-    }
+  formatParagraphs() {
+    let newDoc = this.markdown
+    let ph = new ParagraphHelper(newDoc)
+    this.markdown.forEach((line, index, md) => {
+      if (ph.validateLine(line)) {
+        let formattedLine = ph.formatLine(line, index);
+        newDoc.splice(index, 1, formattedLine)
+      }
+    })
+    return newDoc
   }
 
-  precedingDoubleNewLine() {
-    let openingTagDecision = this.beforeLine + this.markdown === this.markdown;
-    return openingTagDecision;
-  }
-
-  incomingDoubleNewLine() {
-    let closingTagDecision = this.markdown + this.afterLine === this.markdown;
-    return closingTagDecision;
-  }
-
-  assignFrontTags() {
-    if ((this.markdown + this.afterLine) === this.markdown) {
-      return `<p>${this.markdown}</p>\n`
-    }
-    else {
-      return `<p>${this.markdown}`
-    }
-  }
-
-  assignBackTags() {
-    return `${this.markdown}</p>\n`
-  }
 }
 module.exports = ParagraphFormatter;

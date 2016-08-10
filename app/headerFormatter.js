@@ -3,11 +3,21 @@ class HeaderFormatter {
     this.markdown = markdown;
   }
 
-  applyHTags(){
-    const splitMarkdown = this.markdown.split(' ');
-    let headerSize = splitMarkdown.splice(0, 1).toString().length;
-    let markdown = splitMarkdown.join(' ');
-    return `<h${headerSize}>${markdown}</h${headerSize}>\n\n`
+  formatHeaders(){
+    let newDoc = this.markdown
+    this.markdown.forEach((line, index) => {
+      if (line[0] === '#') {
+        let headerSize = line.split(' ')[0].toString().length
+        let header = line.substring(headerSize + 1)
+        let formattedHeader = `<h${headerSize}>${header}</h${headerSize}>\n\n`
+        newDoc.splice(index, 1, formattedHeader)
+      }
+    })
+    return newDoc;
+  }
+
+  headerValidation(line) {
+    return line[0] === '#'
   }
 }
 module.exports = HeaderFormatter;
